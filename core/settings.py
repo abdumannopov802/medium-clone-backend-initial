@@ -164,12 +164,13 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
-# drf_spectacular swagger
+# drf_spectacular
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Medium',
     'DESCRIPTION': 'Medium Clone project',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,  # yangi qo'shildi | fayl yuklash uchun majburiy
     'SECURITY_DEFINITIONS': {
         'Bearer': {
             'type': 'apiKey',
@@ -178,6 +179,7 @@ SPECTACULAR_SETTINGS = {
         }
     },
 }
+
 
 # JWT
 SIMPLE_JWT = {
