@@ -137,8 +137,8 @@ class UsersMe(generics.RetrieveAPIView, generics.UpdateAPIView):
     )
 )
 class LogoutView(generics.GenericAPIView):
-    authentication_classes: tuple[Type[CustomJWTAuthentication]] = CustomJWTAuthentication,
-    permission_classes: tuple[Type[permissions.IsAuthenticated]] = permissions.IsAuthenticated,
+    authentication_classes = CustomJWTAuthentication,
+    permission_classes = permissions.IsAuthenticated,
 
     @extend_schema(responses=None)
     def post(self, request, *args, **kwargs):
