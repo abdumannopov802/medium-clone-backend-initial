@@ -13,6 +13,8 @@ from drf_spectacular.utils import extend_schema, extend_schema_view
 from django_redis import get_redis_connection
 from .enums import TokenType
 from .services import TokenService, UserService
+from typing import Type
+from authentications import CustomJWTAuthentication
 
 User = get_user_model()
 
@@ -101,9 +103,9 @@ class LoginView(APIView):
     )
 )
 class UsersMe(generics.RetrieveAPIView, generics.UpdateAPIView):
-    http_method_names = ['get', 'patch']             # patch qo'shildi
+    http_method_names = ['get', 'patch']
     queryset = User.objects.filter(is_active=True)
-    parser_classes = [parsers.MultiPartParser]       # fayl yuklash uchun MultiPartParser qo'shildi
+    parser_classes = [parsers.MultiPartParser]
     permission_classes = (IsAuthenticated,)
 
     def get_object(self):
@@ -136,6 +138,8 @@ class UsersMe(generics.RetrieveAPIView, generics.UpdateAPIView):
 )
 class LogoutView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes: tuple[Type[CustomJWTAuthentication]] = CustomJWTAuthentication,
+    permission_classes: tuple[Type[permissions.IsAuthenticated]] = permissions.IsAuthenticated,
 
     @extend_schema(responses=None)
     def post(self, request, *args, **kwargs):
