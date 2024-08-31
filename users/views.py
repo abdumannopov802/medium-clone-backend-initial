@@ -137,7 +137,6 @@ class UsersMe(generics.RetrieveAPIView, generics.UpdateAPIView):
     )
 )
 class LogoutView(generics.GenericAPIView):
-    permission_classes = [permissions.IsAuthenticated]
     authentication_classes: tuple[Type[CustomJWTAuthentication]] = CustomJWTAuthentication,
     permission_classes: tuple[Type[permissions.IsAuthenticated]] = permissions.IsAuthenticated,
 
